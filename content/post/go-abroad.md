@@ -1,10 +1,10 @@
 +++
 date = "2016-03-09T10:12:48+08:00"
-draft = true
 title = "go abroad"
-
 +++
 
-* add time zone to your watch
+* passport, driver lisence
+* currency exchange
+* add time zone of destination to your watch/mobile
 * check weather of destination, clothes
 * change-over plug

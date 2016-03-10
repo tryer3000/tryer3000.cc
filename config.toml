@@ -1,4 +1,11 @@
-baseurl = "http://replace-this-with-your-hugo-site.com/"
+baseurl = "http://tryer3000.cc"
 languageCode = "en-us"
-title = "My New Hugo Site"
-theme = "tachyons"
+title = "A POEM OF LIFE"
+theme = "slim"
+paginate = 5
+googleAnalytics = "UA-74937756-1"
+disqusShortname = "tryer3000"
+
+[[menu.main]]
+  Name = "about"
+  URL = "/about"
