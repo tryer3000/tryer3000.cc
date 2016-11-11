@@ -1,3 +1,18 @@
+.whatsup {
+  text-transform: capitalize;
+}
+.post-title {
+  color: #b49e09;
+  text-align: center;
+}
+header a,
+footer a
+{
+  color: #5BC3EB;
+}
+footer {
+  text-align: center;
+}
 body {
   margin: 0 auto;
   max-width: 50em;
@@ -57,7 +72,4 @@ li {
 }
 .disabled {
   pointer-events: none;
-}
-.post-title {
-  /*font-family: 'Shadows Into Light', cursive;*/
 }
