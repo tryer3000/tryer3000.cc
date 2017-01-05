@@ -3,7 +3,12 @@
   
   <url>
     <loc>http://blog.tryer3000.cc/</loc>
-    <lastmod>2016-10-31T08:42:14+08:00</lastmod>
+    <lastmod>2017-01-05T00:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.tryer3000.cc/post/js-prototype/</loc>
+    <lastmod>2017-01-05T00:00:00+08:00</lastmod>
   </url>
   
   <url>
@@ -19,10 +24,6 @@
   <url>
     <loc>http://blog.tryer3000.cc/about/</loc>
     <lastmod>2016-02-25T16:55:03+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.tryer3000.cc/post/js-prototype/</loc>
   </url>
   
 </urlset>

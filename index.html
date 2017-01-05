@@ -24,149 +24,160 @@
 </header>
 
     
-       <h1 class="post-title">Introduction to Vue</h1>
+       <h1 class="post-title">Javascript Prototype</h1>
        
 
-<h2 id="basic">Basic</h2>
+<p><em>note of <a href="https://github.com/getify/You-Dont-Know-JS/tree/master/this%20%26%20object%20prototypes">You Don&rsquo;t know JS</a></em></p>
 
-<pre><code class="language-html">&lt;div id=&quot;app&quot;&gt;
-  {{ message }}
-&lt;/div&gt;
+<h2 id="data-types-in-javascript">Data types in Javascript</h2>
+
+<pre><code class="language-javascript">// Javascript has 6 primitive data(immutable) types
+typeof 3.14  // 'number';
+typeof 'bla'  // 'string';
+typeof true  // 'boolean'
+typeof Symbol.iterator  // 'symbol'
+typeof undefined  // 'undefined'
+typeof null  // 'object'
+
+// and object
+typeof {a:1}  // 'object'
+typeof function fn(){}  // 'function', it's in fact an object with special type tag
+
+
+// object has sub type
+Object.prototype.toString.call(fn)  // '[object Function]'
+
+// primitive types have object equivalent that wrap around them.
+Object.prototype.toString.call(3.14)  // '[object Number]'
+Object.prototype.toString.call('bla')  // '[object String]'
+Object.prototype.toString.call(true)  // '[object Boolean]'
+Object.prototype.toString.call(Symbol.iterator)  // '[object Symbol]'
+
+Object.prototype.toString.call({})  // '[object Object]'
+Object.prototype.toString.call([])  // '[object Array]'
+Object.prototype.toString.call(/[a-zA-Z]+/)  // '[object RegExp]'
+
 </code></pre>
 
-<pre><code class="language-javascript">var app = new Vue({
-  el: '#app',
-  data: {
-    message: 'Hello Vue!'
-  }
-})
+<p><code>null</code> is not an object for it has no any property.</p>
+
+<p>for why <code>typeof null === 'object'</code> see details <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof#null">here</a></p>
+
+<h2 id="object-property">Object property</h2>
+
+<pre><code class="language-javascript">var myObject = {
+    a: 2
+};
+
+// `in` operator will check upwards the whole prototype chain
+('a' in myObject) // true
+('toString' in myObject) // true
+// `hasOwnProperty` function check only `this` object
+(myObject.hasOwnProperty('toString'))  // false
+
+// property has characteristics decribed by sth called `descriptor`
+Object.getOwnPropertyDescriptor( myObject, &quot;a&quot; );
+// {
+//    value: 2,
+//    writable: true,
+//    enumerable: true,
+//    configurable: true
+// }
+
+// another way to define property
+Object.defineProperty( myObject, &quot;a&quot;, {
+    value: 2,
+    writable: true,
+    configurable: true,
+    enumerable: true
+} );
+
+// prevent an object from having new properties added to it
+Object.preventExtensions( myObject );
+
+Object.seal(..) 
+// Object.preventExtensions(..) + marks all its existing properties as configurable:false.
+
+Object.freeze(..)
+// Object.seal(..) + marks all &quot;data accessor&quot; properties as writable:false
+
+// descriptor includes data descriptor and accessor descriptor
+Object.defineProperty(
+    myObject,   // target
+    &quot;b&quot;,        // property name
+    {           // descriptor
+        // define a getter for `b`
+        get: function(){ return this.a * 2 },
+
+        // make sure `b` shows up as an object property
+        enumerable: true
+    }
+);
+
+myObject.b;  // 4
 </code></pre>
 
-<p>Vue inherits a lot from angular. Both has concept of <code>directives</code> and <code>components</code>.</p>
+<h2 id="what-is-this">What is <code>this</code>?</h2>
 
-<p>We will skip those similarities, but focus on differences here.</p>
+<pre><code class="language-javascript">function dcyy() {
+  console.log(this.name, '到此一游 :(');
+}
+var name = 'global';
+var zs = {
+  name: '张三',
+  dcyy
+}
+var ls = {
+  name: '李四'
+}
 
-<h3 id="directive-has-modifier-and-arguments">Directive has Modifier and Arguments</h3>
-
-<pre><code class="language-html">&lt;input v-model.number=&quot;age&quot; type=&quot;number&quot;&gt;
-&lt;a v-bind:href=&quot;url&quot;&gt;&lt;/a&gt;
+dcyy();  // global 到此一游 :(
+zs.dcyy();  // '张三 到此一游 :(
+dcyy.call(ls);  // 李四 到此一游 :(
+new dcyy();
+// undefined '到此一游 :('
+// dcyy {}
 </code></pre>
 
-<ul>
-<li>Modifiers are special postfixes denoted by a dot, which indicate that a directive should be bound in some special way.</li>
-<li>Some directives can take an “argument”, denoted by a colon after the directive name.</li>
-</ul>
-
-<h3 id="component-has-slots">Component has slots</h3>
-
-<p><img src="http://p1.bpimg.com/567571/d8c7009a5bc6f77a.jpg" alt="slot" /></p>
-
-<p>The API for a Vue component comes in three parts - props, events, and slots:</p>
+<p><code>this</code> is not an author-time binding but a runtime binding.</p>
 
 <ol>
-<li>Props allow the external environment to pass data into the component</li>
-<li>Events allow the component to trigger side effects in the external environment</li>
-<li>Slots allow the external environment to compose the component with extra content.</li>
+<li><p>Called with new? Use the newly constructed object.</p></li>
+
+<li><p>Called with <code>call</code> or <code>apply</code> (or <code>bind</code>)? Use the specified object.</p></li>
+
+<li><p>Called with a context object owning the call? Use that context object.</p></li>
+
+<li><p>Default: undefined in strict mode, global object otherwise.</p></li>
 </ol>
 
-<pre><code class="language-html">&lt;my-component
-  v-bind:foo=&quot;baz&quot;
-  v-bind:bar=&quot;qux&quot;
-  v-on:event-a=&quot;doThis&quot;
-  v-on:event-b=&quot;doThat&quot;
-&gt;
-  &lt;img slot=&quot;icon&quot; src=&quot;...&quot;&gt;
-  &lt;p slot=&quot;main-text&quot;&gt;Hello!&lt;/p&gt;
-&lt;/my-component&gt;
+<h2 id="prototype-chain">Prototype Chain</h2>
+
+<pre><code class="language-javascript">function Foo() {
+    // ...
+}
+
+var a = new Foo();
+
+Object.getPrototypeOf( a ) === Foo.prototype; // true
+
+a.__proto__ === Foo.prototype;  // true
+
+Foo.prototype.isPrototypeOf(a);  // true
+
+var p = {
+    sayHi: function () {
+        console.log('hi!');
+    }
+}
+var c = Object.create(p);
+c.sayHi();  // 'hi!'
+
 </code></pre>
 
-<h2 id="vue-ecosystem">Vue Ecosystem</h2>
+<p>So, when u create an object use <code>new</code> operator and a function say <em>fn</em>, the prototype of this created object is <code>fn.prototype</code></p>
 
-<ul>
-<li><p><a href="http://router.vuejs.org/">vue-router</a> is officially-supported</p></li>
-
-<li><p><a href="http://vuex.vuejs.org/">vuex</a> is a state management pattern + library for Vue.js applications.</p></li>
-</ul>
-
-<h2 id="comparison">Comparison</h2>
-
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th align="center">Angular</th>
-<th align="center">Angular 2</th>
-<th align="center">React</th>
-<th align="right">Vue</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>Star(Github)</td>
-<td align="center">53015</td>
-<td align="center">17748</td>
-<td align="center">52844</td>
-<td align="right">32113</td>
-</tr>
-
-<tr>
-<td>Fork(Github)</td>
-<td align="center">26177</td>
-<td align="center">4525</td>
-<td align="center">9306</td>
-<td align="right">3645</td>
-</tr>
-
-<tr>
-<td>Issue(on/off)</td>
-<td align="center"><sup>674</sup>&frasl;<sub>7460</sub></td>
-<td align="center"><sup>811</sup>&frasl;<sub>6964</sub></td>
-<td align="center"><sup>484</sup>&frasl;<sub>3336</sub></td>
-<td align="right"><sup>66</sup>&frasl;<sub>3069</sub></td>
-</tr>
-
-<tr>
-<td>Size</td>
-<td align="center">156K</td>
-<td align="center">636K</td>
-<td align="center">150K</td>
-<td align="right">64K</td>
-</tr>
-
-<tr>
-<td>LOC(TodoMVC)</td>
-<td align="center">442</td>
-<td align="center">198</td>
-<td align="center">520</td>
-<td align="right">221</td>
-</tr>
-
-<tr>
-<td>Size(TodoMVC)</td>
-<td align="center">1.1M</td>
-<td align="center">1.6M</td>
-<td align="center">1.2M</td>
-<td align="right">294K</td>
-</tr>
-</tbody>
-</table>
-
-<p><em>created on 10/31/2016</em></p>
-
-<p><strong>PS:</strong></p>
-
-<ul>
-<li>Angular 2 requires Typescript while others require Javascript.</li>
-<li>Angular 2, React and Vue support cross-platform programming.</li>
-<li>Angular offer more features. But React and Vue get enhancement from
-additional libraries, which is authored and supported by community.</li>
-<li>From the metric above, Vue has the smallest community.</li>
-</ul>
-
-<p><a href="http://vuejs.org/guide/comparison.html">Read more</a> on differences among these front-end Javascript frameworks.</p>
-
-<p>You can use <a href="https://github.com/vuejs/vue-cli">vue-cli</a> to scaffold Vue.js projects.</p>
+<p><code>You Dont Know JS</code> advocates prototype pattern which is the foundation of JS, objects OO simulation.</p>
 
     
     <footer>
