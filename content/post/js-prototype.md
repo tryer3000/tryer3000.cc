@@ -125,14 +125,9 @@ new dcyy();
 `this` is not an author-time binding but a runtime binding.
 
 1. Called with new? Use the newly constructed object.
-
 2. Called with `call` or `apply` (or `bind`)? Use the specified object.
-
 3. Called with a context object owning the call? Use that context object.
-
 4. Default: undefined in strict mode, global object otherwise.
-
-
 
 ## Prototype Chain
 

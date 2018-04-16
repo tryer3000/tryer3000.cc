@@ -54,9 +54,8 @@ The API for a Vue component comes in three parts - props, events, and slots:
 
 ## Vue Ecosystem
 
-  * [vue-router](http://router.vuejs.org/) is officially-supported
-
-  * [vuex](http://vuex.vuejs.org/) is a state management pattern + library for Vue.js applications.
+* [vue-router](http://router.vuejs.org/) is officially-supported
+* [vuex](http://vuex.vuejs.org/) is a state management pattern + library for Vue.js applications.
 
 
 ## Comparison
@@ -75,8 +74,7 @@ The API for a Vue component comes in three parts - props, events, and slots:
 
 * Angular 2 requires Typescript while others require Javascript.
 * Angular 2, React and Vue support cross-platform programming.
-* Angular offer more features. But React and Vue get enhancement from
-  additional libraries, which is authored and supported by community.
+* Angular offer more features. But React and Vue get enhancement from additional libraries, which is authored and supported by community.
 * From the metric above, Vue has the smallest community.
 
 [Read more](http://vuejs.org/guide/comparison.html) on differences among these front-end Javascript frameworks.

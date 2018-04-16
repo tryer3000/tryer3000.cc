@@ -1,6 +1,6 @@
 +++
-title: "Concurrent Python"
-date: 2017-11-07T18:56:06+08:00
+title = "Concurrent Python"
+date = 2017-11-07T18:56:06+08:00
 draft = true
 +++
 

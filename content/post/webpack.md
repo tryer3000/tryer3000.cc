@@ -5,11 +5,11 @@ title = "Webpack"
 
 +++
 ## Motivation or Problems
-  * There are multiple standards of module system in JS world including CommonJS, AMD, ES6 modules and `<script>` tag style.
-  * There are two extremes when transferring modules
-    1. one request per module
-    2. All modules in one request
-  * Why should a module system only help the developer with JavaScript?
+* There are multiple standards of module system in JS world including CommonJS, AMD, ES6 modules and `<script>` tag style.
+* There are two extremes when transferring modules
+  1. one request per module
+  2. All modules in one request
+* Why should a module system only help the developer with JavaScript?
 
 ## IO
 Webpack is a module bundler.
@@ -20,23 +20,16 @@ It takes a bunch of files, treating each as a module, figuring out the dependenc
 
 ### Some concepts of Webpack
 * chunk: A batch of modules that bundled into one single file.
-
 * loader: Transformations that are applied on a resource file(module) of your app.
-
 * plugin: Add functionality typically related to bundles in webpack.
 
 ### Some plugins
-  * DefinePlugin: Allows you to create global constants which can be configured at compile time.
-
-  * HotModuleReplacementPlugin: Enables Hot Module Replacement.
-
-  * HtmlWebpackPlugin: Generates a solid base html page for your web application with all your webpack generated css and js files built in.
-
-  * CommonsChunkPlugin: Generate an extra chunk, which contains common modules shared between entry points.
-
-  * UglifyJsPlugin: Minimize all JavaScript output of chunks.
-
-  * ExtractTextPlugin: Extract text from bundle into a file.
+* DefinePlugin: Allows you to create global constants which can be configured at compile time.
+* HotModuleReplacementPlugin: Enables Hot Module Replacement.
+* HtmlWebpackPlugin: Generates a solid base html page for your web application with all your webpack generated css and js files built in.
+* CommonsChunkPlugin: Generate an extra chunk, which contains common modules shared between entry points.
+* UglifyJsPlugin: Minimize all JavaScript output of chunks.
+* ExtractTextPlugin: Extract text from bundle into a file.
 
 ### Example of Webpack configuration
 
