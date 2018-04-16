@@ -1,0 +1,22 @@
++++
+title = "sum:out of tar pit"
+draft = true
+date = "2017-03-29T10:41:48+08:00"
+
++++
+
+
+give an outline for a potential complexity-minimizing approach based on 
+functional programming and Codd’s relational model of data.
+
+The other justification is that improvements in informal reasoning will lead to
+less errors being created whilst all that improvements in testing can do is to 
+lead to more errors being detected.
+
+## Chap 9
+In contrast with the object-oriented approach, FRP emphasises a clear separation
+of state and behaviour.
+
+FRP strongly encourages that data be treated as essential state only when it has
+been input directly by a user
+

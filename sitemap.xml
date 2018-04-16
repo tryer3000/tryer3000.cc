@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://blog.tryer3000.cc/</loc>
-    <lastmod>2017-01-05T00:00:00+08:00</lastmod>
+    <loc>http://blog.tryer3000.cc/post/cs-design-patterns/</loc>
+    <lastmod>2017-04-12T12:41:10+08:00</lastmod>
   </url>
   
   <url>
@@ -22,8 +23,25 @@
   </url>
   
   <url>
-    <loc>http://blog.tryer3000.cc/about/</loc>
-    <lastmod>2016-02-25T16:55:03+08:00</lastmod>
+    <loc>http://blog.tryer3000.cc/</loc>
+    <lastmod>2017-04-12T12:41:10+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.tryer3000.cc/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.tryer3000.cc/post/</loc>
+    <lastmod>2017-04-12T12:41:10+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.tryer3000.cc/tags/</loc>
+    <priority>0</priority>
   </url>
   
 </urlset>
