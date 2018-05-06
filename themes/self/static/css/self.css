@@ -63,6 +63,9 @@ li {
   padding-left: 2em;
   text-indent: -1em;
 }
+.container {
+  max-width: 50em;
+}
 .whatsup {
   text-transform: capitalize;
 }
